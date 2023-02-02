@@ -1,17 +1,14 @@
 <script lang="ts">
 	import MenuItem from './MenuItem.svelte';
+	import type { Menu } from '../../mockdata';
+
+	export let menu: Menu;
+	const { name, items } = menu;
 </script>
 
-<h2>Maträtter</h2>
+<h2>{name}</h2>
 <table>
-	<MenuItem name="Lasagne" price={99} />
-	<MenuItem name="Pasta" price={79} />
-	<MenuItem name="Pizza" price={89} />
-</table>
-
-<h2>Drycker</h2>
-<table>
-	<MenuItem name="Vatten" price={19} />
-	<MenuItem name="Cola" price={29} />
-	<MenuItem name="Öl" price={39} />
+	{#each items as item}
+		<MenuItem name={item.name} price={item.price} />
+	{/each}
 </table>
