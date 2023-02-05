@@ -1,6 +1,6 @@
 <script lang="ts">
+	import type { Menu } from '../../../prisma/types';
 	import MenuItem from './MenuItem.svelte';
-	import type { Menu } from '../../mockdata';
 
 	export let menu: Menu;
 	const { name, items } = menu;
@@ -8,7 +8,7 @@
 
 <h2>{name}</h2>
 <table>
-	{#each items as item}
-		<MenuItem name={item.name} price={item.price} />
+	{#each items as item (item.id)}
+		<MenuItem {...item} />
 	{/each}
 </table>
