@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { Menu } from '../../../prisma/types';
+	import AddMenuItem from './Forms/AddMenuItem.svelte';
 	import MenuItem from './MenuItem.svelte';
 
 	export let menu: Menu;
-	const { name, items } = menu;
+	const { id, name, items } = menu;
 </script>
 
 <h2>{name}</h2>
@@ -12,3 +13,4 @@
 		<MenuItem {...item} />
 	{/each}
 </table>
+<AddMenuItem {id} />
