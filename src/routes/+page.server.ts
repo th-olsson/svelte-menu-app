@@ -20,6 +20,26 @@ export const actions: Actions = {
 				}
 			});
 			return {
+				status: 201,
+				body: menuItem
+			};
+		} catch (error) {
+			console.error(error);
+			return fail(500, { message: 'Internal Server Error' });
+		}
+	},
+	deleteMenuItem: async ({ request }) => {
+		const { menuItemId } = Object.fromEntries(await request.formData());
+		if (!menuItemId) {
+			return fail(400, { message: 'Bad Request' });
+		}
+		try {
+			const menuItem = await prisma.menuItem.delete({
+				where: {
+					id: String(menuItemId)
+				}
+			});
+			return {
 				status: 200,
 				body: menuItem
 			};
@@ -27,8 +47,5 @@ export const actions: Actions = {
 			console.error(error);
 			return fail(500, { message: 'Internal Server Error' });
 		}
-		return {
-			status: 201
-		};
 	}
 };

@@ -21,8 +21,3 @@
 		<button type="submit">Add</button>
 	</fieldset>
 </form>
-
-<p>
-	name: {name} <br />
-	price: {price}
-</p>
