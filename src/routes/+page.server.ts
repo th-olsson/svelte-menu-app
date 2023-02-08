@@ -47,5 +47,29 @@ export const actions: Actions = {
 			console.error(error);
 			return fail(500, { message: 'Internal Server Error' });
 		}
+	},
+	updateMenuItem: async ({ request }) => {
+		const { menuItemId, name, price } = Object.fromEntries(await request.formData());
+		if (!menuItemId) {
+			return fail(400, { message: 'Bad Request' });
+		}
+		try {
+			const menuItem = await prisma.menuItem.update({
+				where: {
+					id: String(menuItemId)
+				},
+				data: {
+					name: String(name),
+					price: Number(price)
+				}
+			});
+			return {
+				status: 200,
+				body: menuItem
+			};
+		} catch (error) {
+			console.error(error);
+			return fail(500, { message: 'Internal Server Error' });
+		}
 	}
 };
